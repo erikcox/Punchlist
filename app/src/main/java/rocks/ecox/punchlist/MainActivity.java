@@ -1,4 +1,4 @@
-package rocks.ecox.todoapp;
+package rocks.ecox.punchlist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> todoItems;
     ArrayAdapter<String> aToDoAdapter;
     ListView lvItems;
-    EditText etEditText;
+    EditText etAddText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         // Set up views
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(aToDoAdapter);
-        etEditText = (EditText) findViewById(R.id.etEditText);
+        etAddText = (EditText) findViewById(R.id.etAddText);
 
         // Remove item on long press
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAddItem(View view) {
-        aToDoAdapter.add(etEditText.getText().toString());
-        etEditText.setText("");
+        aToDoAdapter.add(etAddText.getText().toString());
+        etAddText.setText("");
         writeItems();
     }
 }
