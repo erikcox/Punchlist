@@ -32,7 +32,8 @@ public class EditItemActivity extends AppCompatActivity {
         intent.putExtra("itemPosition", position);
         etEditText.setText("");
         Log.d("EDIT_FEATURE", "Sending: " + updatedText + " at position " + position + " to Main.");
-        startActivity(intent);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }

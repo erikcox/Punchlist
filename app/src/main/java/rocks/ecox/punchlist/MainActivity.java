@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private final int EDIT_STATUS = 200;
     ArrayList<String> todoItems;
     ArrayAdapter<String> aToDoAdapter;
     ListView lvItems;
@@ -34,22 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Update the array items
         populateArrayItems();
-
-        // Get edited item text
-        Intent intent = getIntent();
-        if(intent.getIntExtra("itemPosition", -1) > 0) {
-            String editedItem = intent.getStringExtra("updatedItem");
-            Log.d("EDIT_FEATURE", "Got edited item: " + editedItem);
-            int itemPosition = intent.getIntExtra("itemPosition", -1);
-            Log.d("EDIT_FEATURE", "Got position: " + itemPosition);
-            try {
-                todoItems.set(itemPosition, editedItem);
-                aToDoAdapter.notifyDataSetChanged();
-                writeItems();
-            }catch (Exception e) {
-                Log.e("EDIT_FEATURE", "" + e);
-            }
-        }
 
         // Set up views
         lvItems = (ListView) findViewById(R.id.lvItems);
@@ -76,9 +61,28 @@ public class MainActivity extends AppCompatActivity {
                 editItem.putExtra("itemPosition", position);
                 editItem.putExtra("itemValue", todoItems.get(position));
                 Log.d("EDIT_FEATURE", "Sent position: " + position + " with Value:" + todoItems.get(position));
-                startActivity(editItem);
+                startActivityForResult(editItem, EDIT_STATUS);
             }
         });
+    }
+
+    // Update edited item
+    @Override
+    protected void  onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            String editedItem = data.getStringExtra("updatedItem");
+            int itemPosition = data.getExtras().getInt("itemPosition", -1);
+            Log.d("EDIT_FEATURE", "Got edited item: " + editedItem + " at position: " + itemPosition);
+            if (itemPosition > 0) {
+                try {
+                    todoItems.set(itemPosition, editedItem);
+                    aToDoAdapter.notifyDataSetChanged();
+                    writeItems();
+                }catch (Exception e) {
+                    Log.e("EDIT_FEATURE", "" + e);
+                }
+            }
+        }
     }
 
     public void populateArrayItems() {
