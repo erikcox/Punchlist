@@ -1,8 +1,12 @@
 package rocks.ecox.punchlist;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -15,24 +19,42 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     ArrayList<String> todoItems;
     ArrayAdapter<String> aToDoAdapter;
     ListView lvItems;
-    EditText etAddText;
+    EditText etNewItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
         // Update the array items
         populateArrayItems();
+
+        // Get edited item text
+        Intent intent = getIntent();
+        if(intent.getIntExtra("itemPosition", -1) > 0) {
+            String editedItem = intent.getStringExtra("updatedItem");
+            Log.d("EDIT_FEATURE", "Got edited item: " + editedItem);
+            int itemPosition = intent.getIntExtra("itemPosition", -1);
+            Log.d("EDIT_FEATURE", "Got position: " + itemPosition);
+            try {
+                todoItems.set(itemPosition, editedItem);
+                aToDoAdapter.notifyDataSetChanged();
+                writeItems();
+            }catch (Exception e) {
+                Log.e("EDIT_FEATURE", "" + e);
+            }
+        }
 
         // Set up views
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(aToDoAdapter);
-        etAddText = (EditText) findViewById(R.id.etAddText);
+        etNewItem = (EditText) findViewById(R.id.etNewItem);
 
         // Remove item on long press
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -44,9 +66,20 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-    }
 
-    // TODO: add edit activity & layout
+        // Edit item on regular press
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("EDIT_FEATURE", "Editing item in position: " + position);
+                Intent editItem = new Intent(MainActivity.this, EditItemActivity.class);
+                editItem.putExtra("itemPosition", position);
+                editItem.putExtra("itemValue", todoItems.get(position));
+                Log.d("EDIT_FEATURE", "Sent position: " + position + " with Value:" + todoItems.get(position));
+                startActivity(editItem);
+            }
+        });
+    }
 
     public void populateArrayItems() {
         readItems();
@@ -61,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             todoItems = new ArrayList<String>(FileUtils.readLines(file));
         } catch (IOException e) {
             todoItems = new ArrayList<String>();
+            e.printStackTrace();
         }
     }
 
@@ -76,8 +110,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAddItem(View view) {
-        aToDoAdapter.add(etAddText.getText().toString());
-        etAddText.setText("");
+        aToDoAdapter.add(etNewItem.getText().toString());
+        etNewItem.setText("");
         writeItems();
+        hideKeyboard(view);
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
