@@ -1,6 +1,6 @@
 # *Punchlist*
 
-**Punchlist** is an android app that allows building a todo list and basic todo item management functionality including adding new items, editing and deleting an existing item.
+**Punchlist** is an Android app that allows building a to-do list and basic to-do item management functionality, including adding new items, and editing and deleting an existing item.
 
 Submitted by: **Erik Cox**
 
