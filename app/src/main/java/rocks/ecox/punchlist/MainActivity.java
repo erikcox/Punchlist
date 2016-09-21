@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Add to-do item
     public void onAddItem(View view) {
         aToDoAdapter.add(etNewItem.getText().toString());
         etNewItem.setText("");
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         hideKeyboard(view);
     }
 
+    // Hide the keyboard after adding an item
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);

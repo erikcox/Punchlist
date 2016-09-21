@@ -35,5 +35,4 @@ public class EditItemActivity extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         finish();
     }
-
 }
