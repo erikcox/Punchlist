@@ -4,7 +4,7 @@
 
 Submitted by: **Erik Cox**
 
-Time spent: 9 hours spent in total
+Time spent: 11 hours spent in total
 
 ## User Stories
 
@@ -22,6 +22,7 @@ The following **optional** features are implemented:
 * [x] Added padding between ListView items for readability
 * [x] To-do items are persisted in SQLite via [ActiveAndroid](http://www.activeandroid.com/) instead of a text file
 * [x] To-do items have been styled with a custom adapter
+* [x] Replaced the edit item Activity with an edit item DialogFragment.
 
 ## Video Walkthrough 
 
@@ -35,6 +36,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 * I had some trouble verifying the data passed back in the EditActivity.
 * I ran into a bug with Android Studio's Instant Run feature with regards to Active Android. I found a fix [here](http://stackoverflow.com/a/36509952/483658).
+* I kept getting the error *Cannot resolve symbol R*. This was resolved by doing a **Build->Clean Project** and **Sync Project with Gradle Files**.
 
 ## License
 
