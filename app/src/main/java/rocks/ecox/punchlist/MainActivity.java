@@ -3,6 +3,7 @@ package rocks.ecox.punchlist;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,14 +30,14 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        // Get items from DB
-        getItems();
-
         // Set up views
         etNewItem = (EditText) findViewById(R.id.etNewItem);
-        aToDoAdapter = new TodoItemAdapter(this, todoItems);
         lvItems = (ListView) findViewById(R.id.lvItems);
+        // Get items from DB
+        getItems();
+        aToDoAdapter = new TodoItemAdapter(this, todoItems);
         lvItems.setAdapter(aToDoAdapter);
+
 
         // Remove to-do item on long press
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -53,15 +54,12 @@ public class MainActivity extends AppCompatActivity {
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent editItem = new Intent(MainActivity.this, EditItemActivity.class);
-                editItem.putExtra("itemPosition", position);
-                editItem.putExtra("itemValue", todoItems.get(position).name);
-                startActivityForResult(editItem, EDIT_STATUS);
+                launchEditItem(position);
             }
         });
     }
 
-    // Update edited item from EditItemActivity
+    // Update edited item from EditItemFragment
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -106,6 +104,16 @@ public class MainActivity extends AppCompatActivity {
         aToDoAdapter.add(item);
         hideKeyboard(view);
         etNewItem.setText("");
+    }
+
+    // Launch edit item fragment
+    public void launchEditItem(int position) {
+        String itemName = todoItems.get(position).name;
+
+        FragmentManager fm = getSupportFragmentManager();
+        EditItemFragment editItemDialog = EditItemFragment.newInstance(itemName, position, aToDoAdapter);
+
+        editItemDialog.show(fm, "fragment_edit_item");
     }
 
     // Hide the keyboard after adding an item
