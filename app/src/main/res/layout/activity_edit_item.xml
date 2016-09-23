@@ -11,21 +11,22 @@
     tools:context="rocks.ecox.punchlist.EditItemActivity">
 
     <EditText
+        android:id="@+id/etEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textCapSentences|textMultiLine"
-        android:ems="10"
-        android:id="@+id/etEditText"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="textCapSentences|textMultiLine"/>
 
     <Button
+        android:id="@+id/btnEditItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save_changes"
-        android:id="@+id/btnEditItem"
-        android:layout_below="@+id/etEditText"
         android:layout_alignLeft="@+id/etEditText"
         android:layout_alignStart="@+id/etEditText"
-        android:onClick="saveItem"/>
+        android:layout_below="@+id/etEditText"
+        android:onClick="saveItem"
+        android:text="@string/save_changes"/>
 </RelativeLayout>
