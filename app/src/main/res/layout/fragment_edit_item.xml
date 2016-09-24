@@ -9,34 +9,23 @@
                 android:paddingTop="16dp"
                 android:weightSum="1">
 
-    <EditText
-        android:id="@+id/etEditItemFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewFrag"
-        android:ems="10"
-        android:inputType="textMultiLine"/>
-
     <Button
         android:id="@+id/btnSaveEditFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/etEditItemFrag"
-        android:text="@string/save"/>
+        android:text="@string/save"
+        android:layout_below="@+id/etEditItemFrag"
+        android:layout_alignRight="@+id/textViewFrag"
+        android:layout_alignEnd="@+id/textViewFrag"/>
 
-    <TextView
-        android:id="@+id/textViewFrag"
+    <EditText
+        android:id="@+id/etEditItemFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:inputType="textMultiLine"
         android:layout_alignParentTop="true"
-        android:text="@string/edit_item"
-        android:textSize="@dimen/abc_text_size_large_material"
-        android:textStyle="bold"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
 </RelativeLayout>
