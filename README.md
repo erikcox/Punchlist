@@ -23,6 +23,8 @@ The following **optional** features are implemented:
 * [x] To-do items are persisted in SQLite via [ActiveAndroid](http://www.activeandroid.com/) instead of a text file
 * [x] To-do items have been styled with a custom adapter
 * [x] Replaced the edit item Activity with an edit item DialogFragment.
+* [x] Added *Stetho* for debugging and *Firebase* for analytics.
+* [x] Added a *due date* with a DatePicker dialog to to-do items.
 
 ## Video Walkthrough 
 

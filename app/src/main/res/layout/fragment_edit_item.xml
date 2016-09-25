@@ -9,14 +9,40 @@
                 android:paddingTop="16dp"
                 android:weightSum="1">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/due_date"
+        android:id="@+id/tvDueDateFrag"
+        android:layout_below="@+id/etEditItemFrag"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"/>
+
+    <EditText
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etDueDateFrag"
+        android:onClick="showDatePickerDialog"
+        android:layout_alignTop="@+id/tvDueDateFrag"
+        android:layout_below="@+id/tvDueDateFrag"
+        android:layout_marginTop="25dp"
+        android:maxLines="1"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
     <Button
         android:id="@+id/btnSaveEditFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
-        android:layout_below="@+id/etEditItemFrag"
-        android:layout_alignRight="@+id/textViewFrag"
-        android:layout_alignEnd="@+id/textViewFrag"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
 
     <EditText
         android:id="@+id/etEditItemFrag"
@@ -26,6 +52,7 @@
         android:inputType="textMultiLine"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:maxLines="1"/>
 
 </RelativeLayout>
