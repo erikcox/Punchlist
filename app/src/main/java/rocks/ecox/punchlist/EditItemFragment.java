@@ -16,6 +16,7 @@ import android.widget.ListView;
 public class EditItemFragment extends DialogFragment implements AdapterView.OnItemSelectedListener {
 
     private EditText etEditItem;
+    private EditText etDueDateFrag;
     int position;
     TodoItemAdapter itemsAdapter;
 
@@ -25,10 +26,11 @@ public class EditItemFragment extends DialogFragment implements AdapterView.OnIt
     }
 
     // Setup edit fragment
-    public static EditItemFragment newInstance(String itemName, int position, TodoItemAdapter itemsAdapter) {
+    public static EditItemFragment newInstance(String itemName, String dueDate, int position, TodoItemAdapter itemsAdapter) {
         EditItemFragment frag = new EditItemFragment();
         Bundle args = new Bundle();
         args.putString("itemName", itemName);
+        args.putString("dueDate", dueDate);
         frag.setArguments(args);
         frag.position = position;
         frag.itemsAdapter = itemsAdapter;
@@ -41,6 +43,7 @@ public class EditItemFragment extends DialogFragment implements AdapterView.OnIt
 
         View rootView = inflater.inflate(R.layout.fragment_edit_item, container, false);
         etEditItem = (EditText) rootView.findViewById(R.id.etEditItemFrag);
+        etDueDateFrag = (EditText) rootView.findViewById(R.id.etDueDateFrag);
 
         return rootView;
     }
@@ -50,9 +53,11 @@ public class EditItemFragment extends DialogFragment implements AdapterView.OnIt
         super.onViewCreated(view, savedInstanceState);
 
         String itemText =  getArguments().getString("itemName", "");
+        String dueDate = getArguments().getString("dueDate", "");
 
         etEditItem.setText(itemText);
         etEditItem.setSelection(etEditItem.getText().length());
+        etDueDateFrag.setText(dueDate);
 
         Button saveButton = (Button)view.findViewById(R.id.btnSaveEditFrag);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -67,12 +72,31 @@ public class EditItemFragment extends DialogFragment implements AdapterView.OnIt
                 Item item = (Item) etItemText.getItemAtPosition(position);
                 item.name = etEditItem.getText().toString();
 
+                if(etDueDateFrag.getText() != null && !etDueDateFrag.getText().toString().equals(""))
+                    item.dueDate = Item.setDateFromString(etDueDateFrag.getText().toString());
+                else
+                    item.dueDate = null;
+
                 item.save();
                 itemsAdapter.notifyDataSetChanged();
                 dismiss();
             }
         });
 
+        EditText etDueDate = (EditText)view.findViewById(R.id.etDueDateFrag);
+        etDueDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DueDateFragment();
+                newFragment.setTargetFragment(EditItemFragment.this, 300);
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
+
+    }
+
+    public void fromDate(String inputText) {
+        etDueDateFrag.setText(inputText);
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,

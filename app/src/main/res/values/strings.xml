@@ -6,4 +6,7 @@
     <string name="to_do_item">To-do item</string>
     <string name="edit_item">Edit item</string>
     <string name="save">Save</string>
+    <string name="due_date">Due date</string>
+    <string name="due">Due</string>
+    <string name="select_due_date">Select due date</string>
 </resources>

@@ -33,7 +33,8 @@
         android:layout_toLeftOf="@+id/btnAddItem"
         android:layout_toStartOf="@+id/btnAddItem"
         android:hint="@string/add_item"
-        android:inputType="textCapSentences"/>
+        android:inputType="textCapSentences"
+        android:maxLines="1"/>
 
     <Button
         android:id="@+id/btnAddItem"

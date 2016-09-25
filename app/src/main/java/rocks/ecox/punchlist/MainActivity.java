@@ -14,10 +14,11 @@ import android.widget.ListView;
 
 import com.facebook.stetho.Stetho;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private final int EDIT_STATUS = 20;
     ListView lvItems;
     private ArrayList<Item> todoItems;
     private TodoItemAdapter aToDoAdapter;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Add Stetho for DB inspection
         Stetho.initializeWithDefaults(this);
 
         // Add icon to action bar
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         getItems();
         aToDoAdapter = new TodoItemAdapter(this, todoItems);
         lvItems.setAdapter(aToDoAdapter);
-
 
         // Remove to-do item on long press
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -112,9 +113,13 @@ public class MainActivity extends AppCompatActivity {
     // Launch edit item fragment
     public void launchEditItem(int position) {
         String itemName = todoItems.get(position).name;
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        String itemDueDate = "";
+        if(todoItems.get(position).dueDate != null)
+            itemDueDate = df.format((todoItems.get(position).dueDate));
 
         FragmentManager fm = getSupportFragmentManager();
-        EditItemFragment editItemDialog = EditItemFragment.newInstance(itemName, position, aToDoAdapter);
+        EditItemFragment editItemDialog = EditItemFragment.newInstance(itemName, itemDueDate,position, aToDoAdapter);
 
         editItemDialog.show(fm, "fragment_edit_item");
     }
