@@ -38,16 +38,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 * I had some trouble verifying the data passed back in the EditActivity.
 * I ran into a bug with Android Studio's *Instant Run* feature with regards to *Active Android*. I found a fix [here](http://stackoverflow.com/a/36509952/483658).
 * I kept getting the error *Cannot resolve symbol R*. This was resolved by doing a **Build->Clean Project** and **Sync Project with Gradle Files**.
-<<<<<<< HEAD
 * I had some issues formatting dates with the DatePicker. If worked fine with Y/M/D & D/M/Y, but not M/D/Y.
-<<<<<<< HEAD
 
-=======
-=======
-* I had some issues formatting dates with the DatePicker. If worked fine with Y/M/D and D/M/Y, but not M/D/Y.
-
->>>>>>> Update walkthrough gif and README
->>>>>>> 70c4a5315933433b718cbd816938c032384decf0
 ## License
 
     Copyright [2016] [Erik Cox]
