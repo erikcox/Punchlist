@@ -4,7 +4,7 @@
 
 Submitted by: **Erik Cox**
 
-Time spent: 11 hours spent in total
+Time spent: 15 hours spent in total
 
 ## User Stories
 
@@ -22,14 +22,13 @@ The following **optional** features are implemented:
 * [x] Added padding between ListView items for readability
 * [x] To-do items are persisted in SQLite via [ActiveAndroid](http://www.activeandroid.com/) instead of a text file
 * [x] To-do items have been styled with a custom adapter
-* [x] Replaced the edit item Activity with an edit item DialogFragment.
-* [x] Added *Stetho* for debugging and *Firebase* for analytics.
+* [x] Replaced the edit item *Activity* with an edit item *DialogFragment*.
+* [x] Added **[Stetho](http://facebook.github.io/stetho/)** for debugging and database **[Firebase](https://firebase.google.com/)** for analytics.
 * [x] Added a *due date* with a DatePicker dialog to to-do items.
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
-
 !['Video Walkthrough'](walkthrough.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
@@ -37,10 +36,18 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 * I had some trouble verifying the data passed back in the EditActivity.
-* I ran into a bug with Android Studio's Instant Run feature with regards to Active Android. I found a fix [here](http://stackoverflow.com/a/36509952/483658).
+* I ran into a bug with Android Studio's *Instant Run* feature with regards to *Active Android*. I found a fix [here](http://stackoverflow.com/a/36509952/483658).
 * I kept getting the error *Cannot resolve symbol R*. This was resolved by doing a **Build->Clean Project** and **Sync Project with Gradle Files**.
+<<<<<<< HEAD
 * I had some issues formatting dates with the DatePicker. If worked fine with Y/M/D & D/M/Y, but not M/D/Y.
+<<<<<<< HEAD
 
+=======
+=======
+* I had some issues formatting dates with the DatePicker. If worked fine with Y/M/D and D/M/Y, but not M/D/Y.
+
+>>>>>>> Update walkthrough gif and README
+>>>>>>> 70c4a5315933433b718cbd816938c032384decf0
 ## License
 
     Copyright [2016] [Erik Cox]
